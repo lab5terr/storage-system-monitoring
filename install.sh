@@ -63,7 +63,7 @@ RAID_TYPE=''
 
 # Dependencies
 declare -A PKG_DEPS
-PKG_DEPS["deb"]='wget libstdc++5 smartmontools liblwp-useragent-determined-perl libnet-https-any-perl libcrypt-ssleay-perl libjson-perl'
+PKG_DEPS["deb"]='wget libstdc++[5-6] smartmontools liblwp-useragent-determined-perl libnet-https-any-perl libcrypt-ssleay-perl libjson-perl'
 PKG_DEPS["deb_old"]='wget libstdc++5 smartmontools liblwp-useragent-determined-perl libnet-https-any-perl libcrypt-ssleay-perl libjson-perl'
 PKG_DEPS["rpm_old"]='wget libstdc++ smartmontools perl-Crypt-SSLeay perl-libwww-perl perl-JSON'
 PKG_DEPS["rpm_new"]='wget libstdc++ smartmontools perl-libwww-perl perl-JSON perl-LWP-Protocol-https'
@@ -176,7 +176,7 @@ _select_os_type()
         Debian[6-7] )
             os_type='deb_old'
         ;;
-        Debian[8-9]|Debian1[0-2]|Ubuntu* )
+        Debian[8-9]|Debian1[0-3]|Ubuntu* )
             os_type='deb'
         ;;
         CentOS6 )
@@ -676,7 +676,7 @@ _restart_smartd()
 
     case $os in
         # systemctl on new OS
-        Debian[8-9]|Debian1[0-2]|CentOS[7-8]|AlmaLinux[8-9]|Rocky[8-9]|Ubuntu1[6789]|Ubuntu2[0-4] )
+        Debian[8-9]|Debian1[0-3]|CentOS[7-8]|AlmaLinux[8-9]|Rocky[8-9]|Ubuntu1[6789]|Ubuntu2[0-4] )
             restart_cmd='systemctl restart smartd.service'
         ;;
         # /etc/init.d/ on sysv|upstart OS
@@ -719,7 +719,7 @@ _enable_smartd_autostart()
 
     case $os in
         # systemctl on new OS
-        Debian[8-9]|Debian1[0-2]|CentOS[7-8]|AlmaLinux[8-9]|Rocky[8-9]|Ubuntu1[6789]|Ubuntu2[0-2] )
+        Debian[8-9]|Debian1[0-3]|CentOS[7-8]|AlmaLinux[8-9]|Rocky[8-9]|Ubuntu1[6789]|Ubuntu2[0-2] )
             enable_cmd='find /usr/lib/systemd/system/ /lib/systemd/system/ /etc/systemd/system/ \
                     -type f \
                     \( -name "smartd.service" -or -name "smartmontools.service" \) \
