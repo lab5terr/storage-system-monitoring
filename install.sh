@@ -727,7 +727,7 @@ _enable_smartd_autostart()
             uniq |\
             xargs systemctl enable'
         ;;
-        # systemctl on Ubuntu 24.04
+        # systemctl on Ubuntu 24/26
         Ubuntu2[4-6] )
             enable_cmd='systemctl enable smartmontools.service'
         ;;
